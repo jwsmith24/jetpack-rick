@@ -4,33 +4,32 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
-import com.example.jetpackrick.data.network.JetpackRickApi
-import com.example.jetpackrick.data.repository.CharacterRepository
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.jetpackrick.data.network.Result
 import com.example.jetpackrick.ui.character.CharacterViewModel
 import com.example.jetpackrick.ui.theme.JetpackRickTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var characterRepository: CharacterRepository // inject repo into main activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +41,38 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             JetpackRickTheme {
+
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val viewModel: CharacterViewModel = hiltViewModel()
-                    val characters by viewModel.characters.collectAsState(initial = emptyList())
+                    val state by viewModel.state.collectAsState(initial = Result.Loading)
 
-                    LazyColumn (modifier = Modifier.padding(innerPadding)) {
-                        items(characters) {
-                            Text(it.name)
+                    when (val s = state) {
+                        is Result.Loading -> {
+                            Box (
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(innerPadding),
+                                contentAlignment = Alignment.Center
+                            ){
+                                CircularProgressIndicator(
+                                    modifier = Modifier.padding(innerPadding
+                                    ))
+                            }
+
+                        }
+                        is Result.Error -> {
+                            Text(
+                                text = "Error: ${s.exception.message}"
+                            )
+                        }
+                        is Result.Success -> {
+                            LazyColumn(modifier = Modifier.padding(innerPadding)) {
+                                items(s.data) {
+                                    character ->
+                                    Text(character.name)
+                                }
+                            }
                         }
                     }
                 }

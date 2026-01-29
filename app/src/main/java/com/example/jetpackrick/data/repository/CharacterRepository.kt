@@ -23,6 +23,8 @@ class CharacterRepository @Inject constructor(
         }
     }
 
+
+
     suspend fun fetchCharacter(characterId: Int) = withContext(Dispatchers.IO) {
         api.getCharacter(characterId)
     }
