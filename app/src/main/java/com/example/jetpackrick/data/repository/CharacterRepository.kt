@@ -5,9 +5,11 @@ import android.util.Log
 import com.example.jetpackrick.data.network.JetpackRickApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CharacterRepository(
-    private val api: JetpackRickApi
+// @Inject constructor === this class can be built by DI
+class CharacterRepository @Inject constructor(
+    private val api: JetpackRickApi // sets a property directly in the constructor
 ) {
 
     suspend fun fetchAllCharacters() = withContext(Dispatchers.IO) {
