@@ -1,4 +1,4 @@
-package com.example.jetpackrick.network
+package com.example.jetpackrick.data.network
 
 import com.example.jetpackrick.data.CharacterListResponse
 import com.example.jetpackrick.data.CharacterResponse
