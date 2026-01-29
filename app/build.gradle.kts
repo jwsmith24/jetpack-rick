@@ -47,10 +47,16 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation("com.squareup.retrofit2:retrofit:3.1.0-SNAPSHOT")
-    implementation("com.squareup.moshi:moshi:2.0.0-alpha.1")
-    implementation("com.squareup.okhttp3:okhttp:5.3.0")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
+
+    implementation("com.squareup.moshi:moshi:1.15.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
 
     testImplementation(libs.junit)
