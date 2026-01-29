@@ -1,4 +1,4 @@
-package com.example.jetpackrick.data.network
+package com.example.jetpackrick.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
