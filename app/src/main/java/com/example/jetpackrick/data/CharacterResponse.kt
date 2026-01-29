@@ -3,7 +3,7 @@ package com.example.jetpackrick.data
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Character(
+data class CharacterResponse(
     val id: Int,
     val name: String,
     val status: String,

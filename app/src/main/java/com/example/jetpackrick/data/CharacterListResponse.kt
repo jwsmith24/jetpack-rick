@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class CharacterListResponse(
     val info: Info,
-    val results: List<Character>
+    val results: List<CharacterResponse>
 )
 
 @JsonClass(generateAdapter = true)
