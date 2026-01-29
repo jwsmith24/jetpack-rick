@@ -11,11 +11,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.example.jetpackrick.data.network.JetpackRickApi
+import com.example.jetpackrick.data.network.RickAndMortyClient
+import com.example.jetpackrick.data.repository.CharacterRepository
 import com.example.jetpackrick.ui.theme.JetpackRickTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val api: JetpackRickApi = RickAndMortyClient.api
+        val repository = CharacterRepository(api)
+
+        lifecycleScope.launch {
+
+            try {
+                repository.printCharacters()
+            } catch(exception: Exception) {
+                exception.printStackTrace()
+            }
+        }
+
+
         enableEdgeToEdge()
         setContent {
             JetpackRickTheme {
