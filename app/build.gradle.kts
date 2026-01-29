@@ -46,6 +46,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    implementation("com.squareup.retrofit2:retrofit:3.1.0-SNAPSHOT")
+    implementation("com.squareup.moshi:moshi:2.0.0-alpha.1")
+    implementation("com.squareup.okhttp3:okhttp:5.3.0")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
