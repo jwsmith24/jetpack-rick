@@ -21,12 +21,12 @@ data class CharacterResponse(
 
 @JsonClass(generateAdapter = true)
 data class Location(
-    val name: String,
-    val url: String
+    val name: String = "",
+    val url: String = ""
 )
 
 @JsonClass(generateAdapter = true)
 data class Origin(
-    val name: String,
-    val url: String
+    val name: String = "",
+    val url: String = ""
 )

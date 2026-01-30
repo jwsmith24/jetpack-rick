@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.jetpackrick.ui.character.CharacterCard
 import com.example.jetpackrick.ui.character.CharacterScreen
 import com.example.jetpackrick.ui.character.CharacterViewModel
+import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 import com.example.jetpackrick.ui.theme.JetpackRickTheme
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -15,6 +15,7 @@ import androidx.paging.compose.itemKey
 import com.example.jetpackrick.data.CharacterResponse
 import com.example.jetpackrick.ui.character.CharacterViewModel.Companion.CHARACTER_FETCH_ERROR_MESSAGE
 import com.example.jetpackrick.ui.character.CharacterViewModel.Companion.CHARACTER_LOAD_MORE_ERROR_MESSAGE
+import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 
 
 @Composable
@@ -27,19 +28,24 @@ fun CharacterScreen(
 
     ){
 
-        LazyColumn {
-            items(
-                count = characters.itemCount,
-                key = characters.itemKey { it.id }
-            ) {
-                    index ->
-                val character = characters[index] ?: return@items
-                Text(
-                    text=character.name,
-                    modifier = Modifier.padding(16.dp)
-                )
+        Column {
+            FeaturedCharacters(listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK))
+            LazyColumn {
+                items(
+                    count = characters.itemCount,
+                    key = characters.itemKey { it.id }
+                ) {
+                        index ->
+                    val character = characters[index] ?: return@items
+                    Text(
+                        text=character.name,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
         }
+
+
 
 
         when (val state = characters.loadState.refresh) {
