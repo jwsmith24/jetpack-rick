@@ -55,4 +55,8 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
+    companion object {
+        const val CHARACTER_LIST_HEADER = "Characters"
+    }
+
 }
