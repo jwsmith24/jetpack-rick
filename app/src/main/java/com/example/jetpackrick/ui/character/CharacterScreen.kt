@@ -33,7 +33,7 @@ fun CharacterScreen(
                 .filterNotNull()
                 .ifEmpty { listOf(JETPACK_RICK_MOCK) } // fallback
 
-            FeaturedCharacters(featured)
+            FeaturedCharacters(featured, modifier)
             LazyColumn {
                 items(
                     count = characters.itemCount,
