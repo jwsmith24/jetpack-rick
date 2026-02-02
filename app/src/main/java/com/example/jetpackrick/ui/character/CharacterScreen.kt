@@ -29,7 +29,11 @@ fun CharacterScreen(
     ){
 
         Column {
-            FeaturedCharacters(listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK))
+            val featured: List<CharacterResponse> = characters.itemSnapshotList.take(10)
+                .filterNotNull()
+                .ifEmpty { listOf(JETPACK_RICK_MOCK) } // fallback
+
+            FeaturedCharacters(featured)
             LazyColumn {
                 items(
                     count = characters.itemCount,
