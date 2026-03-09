@@ -36,9 +36,6 @@ fun CharacterScreen(
                 .ifEmpty { listOf(JETPACK_RICK_MOCK) } // fallback
 
             FeaturedCharacters(featured, modifier)
-            CharacterList(characters = List(characters.itemCount) { index ->
-                characters[index]
-            }.filterNotNull())
         }
 
         when (val state = characters.loadState.refresh) {
@@ -74,31 +71,6 @@ fun CharacterScreen(
 
 
     }
-}
-
-@Composable
-fun CharacterList(characters: List<CharacterResponse>) {
-    LazyColumn {
-        items(
-            items = characters,
-            key = { it.id }
-        ) { character ->
-
-            Text(
-                text = character.name,
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun CharacterListPreview() {
-    CharacterList(
-        characters =
-            listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK)
-    )
 }
 
 @Composable

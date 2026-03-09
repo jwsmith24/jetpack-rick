@@ -49,7 +49,8 @@ fun CharacterCard(
                     .align(Alignment.BottomStart)
                     .padding(10.dp)
                     .background(
-                        color = Color(0xFF2EFF7A), RoundedCornerShape(8.dp)
+                        color = Color(0xFF2EFF7A),
+                        shape =RoundedCornerShape(8.dp)
                     )
 
                     .padding(horizontal = 8.dp, vertical = 4.dp),

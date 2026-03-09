@@ -21,7 +21,7 @@ class CharacterViewModel @Inject constructor(
 
 
     companion object {
-        const val CHARACTER_LIST_HEADER = "Characters"
+        const val FEATURED_CHARACTER_LIST_HEADER = "Featured Characters"
         const val CHARACTER_FETCH_ERROR_MESSAGE = "Error loading characters.."
         const val CHARACTER_LOAD_MORE_ERROR_MESSAGE = "Error loading additional characters.."
     }
