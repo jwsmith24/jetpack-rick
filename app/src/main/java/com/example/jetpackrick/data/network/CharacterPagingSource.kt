@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.jetpackrick.data.CharacterResponse
 
-class CharacterPagingSource (private val api: JetpackRickApi): PagingSource<Int, CharacterResponse>() {
+class CharacterPagingSource(private val api: JetpackRickApi) : PagingSource<Int, CharacterResponse>() {
 
     override fun getRefreshKey(state: PagingState<Int, CharacterResponse>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -19,14 +19,14 @@ class CharacterPagingSource (private val api: JetpackRickApi): PagingSource<Int,
             val response = api.getAllCharacters(page)
 
             val nextKey = if (response.info.next == null) null else page + 1
-            val prevKey = if (page == 1) null else page -1
+            val prevKey = if (page == 1) null else page - 1
 
             LoadResult.Page(
                 data = response.results,
                 prevKey = prevKey,
                 nextKey = nextKey
             )
-        } catch(exception: Exception) {
+        } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
     }

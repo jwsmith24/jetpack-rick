@@ -1,7 +1,6 @@
 package com.example.jetpackrick.data.repository
 
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -35,10 +34,9 @@ class CharacterRepository @Inject constructor(
                 prefetchDistance = 5,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { CharacterPagingSource(api)}
+            pagingSourceFactory = { CharacterPagingSource(api) }
         ).flow
     }
-
 
 
     suspend fun fetchCharacter(characterId: Int) = withContext(Dispatchers.IO) {

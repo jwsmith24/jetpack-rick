@@ -28,12 +28,12 @@ fun FeaturedCharacters(
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp)
-            )
+        )
         Spacer(modifier = Modifier.padding(4.dp))
         LazyRow {
-            items(items = characters
-            ) {
-                    character ->
+            items(
+                items = characters
+            ) { character ->
                 CharacterCard(character)
             }
 

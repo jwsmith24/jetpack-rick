@@ -16,20 +16,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.jetpackrick.R
 import com.example.jetpackrick.data.CharacterResponse
 import com.example.jetpackrick.data.Location
 import com.example.jetpackrick.data.Origin
 import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 
-import com.example.jetpackrick.R
-
 @Composable
 fun CharacterCard(
     character: CharacterResponse
 ) {
-    Column (modifier = Modifier.padding(16.dp)){
+    Column(modifier = Modifier.padding(16.dp)) {
         Box {
-
             AsyncImage(
                 model = character.image,
                 contentDescription = "${character.name} avatar",
@@ -42,11 +40,11 @@ fun CharacterCard(
                         width = 3.dp,
                         color = MaterialTheme.colorScheme.primaryContainer,
                         shape = RoundedCornerShape(12.dp)
-                    )
-                ,
+                    ),
                 contentScale = ContentScale.Crop
             )
-            Text(text = character.status,
+            Text(
+                text = character.status,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(10.dp)
@@ -57,19 +55,16 @@ fun CharacterCard(
                     .padding(horizontal = 8.dp, vertical = 4.dp),
                 color = Color.Black
 
-                )
-
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = character.name
-            )
+        Text(
+            text = character.name
+        )
         Text(text = character.species)
-
-
     }
 
 }
-
 
 @Preview()
 @Composable

@@ -2,16 +2,17 @@ package com.example.jetpackrick.ui.character
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.itemKey
 import com.example.jetpackrick.data.CharacterResponse
 import com.example.jetpackrick.ui.character.CharacterViewModel.Companion.CHARACTER_FETCH_ERROR_MESSAGE
 import com.example.jetpackrick.ui.character.CharacterViewModel.Companion.CHARACTER_LOAD_MORE_ERROR_MESSAGE
@@ -21,12 +22,13 @@ import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 @Composable
 fun CharacterScreen(
     modifier: Modifier = Modifier,
-    characters: LazyPagingItems<CharacterResponse>) {
-    Box (
+    characters: LazyPagingItems<CharacterResponse>
+) {
+    Box(
         modifier = modifier
             .fillMaxSize()
 
-    ){
+    ) {
 
         Column {
             val featured: List<CharacterResponse> = characters.itemSnapshotList.take(10)
@@ -34,23 +36,10 @@ fun CharacterScreen(
                 .ifEmpty { listOf(JETPACK_RICK_MOCK) } // fallback
 
             FeaturedCharacters(featured, modifier)
-            LazyColumn {
-                items(
-                    count = characters.itemCount,
-                    key = characters.itemKey { it.id }
-                ) {
-                        index ->
-                    val character = characters[index] ?: return@items
-                    Text(
-                        text=character.name,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
-            }
+            CharacterList(characters = List(characters.itemCount) { index ->
+                characters[index]
+            }.filterNotNull())
         }
-
-
-
 
         when (val state = characters.loadState.refresh) {
             is LoadState.Loading -> {
@@ -60,7 +49,7 @@ fun CharacterScreen(
             is LoadState.Error -> {
                 FullWidthError(
                     message = state.error.message ?: CHARACTER_FETCH_ERROR_MESSAGE,
-                    onRetry = {characters.retry()}
+                    onRetry = { characters.retry() }
                 )
             }
 
@@ -68,7 +57,7 @@ fun CharacterScreen(
         }
 
         when (val state = characters.loadState.append) {
-            is LoadState.Loading ->  {
+            is LoadState.Loading -> {
                 FullWidthSpinner()
 
             }
@@ -76,7 +65,7 @@ fun CharacterScreen(
             is LoadState.Error -> {
                 FullWidthError(
                     message = state.error.message ?: CHARACTER_LOAD_MORE_ERROR_MESSAGE,
-                    onRetry = {characters.retry()}
+                    onRetry = { characters.retry() }
                 )
             }
 
@@ -85,6 +74,31 @@ fun CharacterScreen(
 
 
     }
+}
+
+@Composable
+fun CharacterList(characters: List<CharacterResponse>) {
+    LazyColumn {
+        items(
+            items = characters,
+            key = { it.id }
+        ) { character ->
+
+            Text(
+                text = character.name,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun CharacterListPreview() {
+    CharacterList(
+        characters =
+            listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK)
+    )
 }
 
 @Composable
@@ -112,9 +126,3 @@ private fun FullWidthError(message: String, onRetry: () -> Unit) {
         Button(onClick = onRetry) { Text("Retry") }
     }
 }
-
-//@Preview
-//@Composable
-//fun CharacterScreenPreview() {
-//    CharacterScreen(characters = //todo)
-//}
