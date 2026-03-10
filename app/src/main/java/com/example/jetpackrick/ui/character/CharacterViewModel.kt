@@ -1,5 +1,8 @@
 package com.example.jetpackrick.ui.character
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -18,6 +21,13 @@ class CharacterViewModel @Inject constructor(
     val characters: Flow<PagingData<CharacterResponse>> =
         repository.getCharactersPaged()
             .cachedIn(viewModelScope)
+
+    var selectedCharacter by mutableStateOf<CharacterResponse?>(null)
+        private set
+
+    fun selectCharacter(character: CharacterResponse) {
+        selectedCharacter = character
+    }
 
 
     companion object {

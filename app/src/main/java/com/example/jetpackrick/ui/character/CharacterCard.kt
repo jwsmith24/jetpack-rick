@@ -2,6 +2,7 @@ package com.example.jetpackrick.ui.character
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -24,9 +25,13 @@ import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 
 @Composable
 fun CharacterCard(
-    character: CharacterResponse
+    character: CharacterResponse,
+    onCharacterClick: (CharacterResponse) -> Unit
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier
+        .padding(16.dp)
+        .clickable { onCharacterClick(character) }
+    ) {
         Box {
             AsyncImage(
                 model = character.image,
@@ -71,7 +76,7 @@ fun CharacterCard(
 @Composable
 fun CharacterCardPreview() {
 
-    CharacterCard(JETPACK_RICK_MOCK)
+    CharacterCard(JETPACK_RICK_MOCK, {})
 }
 
 object SampleCharacters {

@@ -30,7 +30,8 @@ import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 @Composable
 fun FeaturedCharacters(
     characters: List<CharacterResponse>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCharacterClick: (CharacterResponse) -> Unit
 ) {
 
     Column(modifier = modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -55,7 +56,7 @@ fun FeaturedCharacters(
             items(
                 items = characters
             ) { character ->
-                CharacterCard(character)
+                CharacterCard(character, onCharacterClick)
             }
 
         }
@@ -67,5 +68,5 @@ fun FeaturedCharacters(
 @Preview(showBackground = true)
 @Composable
 fun FeaturedCharactersPreview() {
-    FeaturedCharacters(listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK))
+    FeaturedCharacters(listOf(JETPACK_RICK_MOCK, JETPACK_RICK_MOCK, JETPACK_RICK_MOCK), Modifier,  {})
 }

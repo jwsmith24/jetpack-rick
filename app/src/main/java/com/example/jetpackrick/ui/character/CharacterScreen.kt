@@ -22,8 +22,10 @@ import com.example.jetpackrick.ui.character.SampleCharacters.JETPACK_RICK_MOCK
 @Composable
 fun CharacterScreen(
     modifier: Modifier = Modifier,
-    characters: LazyPagingItems<CharacterResponse>
+    characters: LazyPagingItems<CharacterResponse>,
+    onCharacterClick: (CharacterResponse) -> Unit
 ) {
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -35,7 +37,7 @@ fun CharacterScreen(
                 .filterNotNull()
                 .ifEmpty { listOf(JETPACK_RICK_MOCK) } // fallback
 
-            FeaturedCharacters(featured, modifier)
+            FeaturedCharacters(featured, modifier, onCharacterClick = onCharacterClick)
         }
 
         when (val state = characters.loadState.refresh) {

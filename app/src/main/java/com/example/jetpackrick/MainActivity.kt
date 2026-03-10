@@ -29,11 +29,7 @@ class MainActivity : ComponentActivity() {
             JetpackRickTheme {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val viewModel: CharacterViewModel = hiltViewModel()
-                    val characters = viewModel.characters.collectAsLazyPagingItems()
-
-                    CharacterScreen(characters = characters, modifier = Modifier.padding(innerPadding))
-
+                    NavGraph(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
