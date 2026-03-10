@@ -45,8 +45,9 @@ fun CharacterDetailScreen(
 
         }
 
-        character.let {
-            AsyncImage(model = it.image, contentDescription = it.name)
+        character.let { // not really doing anything because character is not nullable, but why not use fancy kotlin
+            // if it were nullable, everything in this block would automatically be smart casted to not null so we don't need a ton of ?. etc
+            AsyncImage(model = it.image, contentDescription = it.name, modifier.padding(vertical = 8.dp))
             Text(it.name, style = MaterialTheme.typography.headlineMedium)
             Text("Status: ${it.status}")
             Text("Gender: ${it.gender}")
